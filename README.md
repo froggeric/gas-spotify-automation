@@ -217,34 +217,40 @@ graph TD
 
 ## 5. List of All Managed Spotify Playlists
 
-| Playlist Name                               | Governing Script                | How It's Managed                                                                      |
-| ------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
-| `☆ Bachata Sensual ☆`                         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `☆ Bachata Dominicana ☆`                      | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `★ Chansons françaises ★`                     | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `Cumbia`                                    | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `Merengue`                                  | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `☆ Reggaeton ☆`                             | `playlists_simple.gs`           | Daily shuffle of a source playlist.                                                   |
-| `★ Reggae du jour ★`                          | `playlists_simple.gs`           | Daily refresh with 25 new random tracks from a source.                                |
-| `♡ Romance en plusieurs langues ♡`            | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `Salsa`                                     | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `★ Soulful Rock ★`                          | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
-| `nws - influence`                           | `playlists_simple.gs`           | Alternates tracks from 6 different chill/ambient source playlists.                  |
-| `Bachata`                                   | `playlists_simple.gs`           | Alternates tracks from a modern and a traditional bachata playlist.                 |
-| `Salsa vs Bachata`                          | `playlists_simple.gs`           | Alternates tracks from a combined Bachata and a shuffled Salsa playlist.            |
-| `[all english]`, `[all latin]`, etc.        | `playlists_simple.gs`           | Aggregates tracks from multiple genre-specific playlists into one large shuffled list.|
-| `Melatone`                                  | `playlists_complex.gs`          | Creates a short, relaxing playlist from 3 different "Melatone" source lists.        |
-| `Back to sleep`                             | `playlists_complex.gs`          | Creates a very short playlist for falling back asleep.                                |
-| `Latin party mix`                           | `playlists_complex.gs`          | Alternates Cumbia, Salsa, Bachata, Merengue, filtering by track duration.           |
-| `★ Bachata vs Salsa vs Cumbia ★`              | `playlists_complex.gs`          | Creates a 150-track playlist following a strict BSBSBC pattern.                     |
-| `Running 180 bpm`, `Cycling 80 rpm`, etc.   | `playlists_complex.gs`          | Generates fitness playlists by filtering source tracks by BPM and audio features.     |
-| `🌿🧘 Relax and Focus...` (Promo)             | `playlist_artistpromo.gs`       | A promotional playlist combining an artist's tracks with other popular tracks.        |
-| `Café Con Leche: A Latin Music Blend` (Promo) | `playlist_artistpromo.gs`       | A promotional playlist combining an artist's tracks with other popular tracks.        |
-| `La playlist d'aujourd'hui`                 | `playlists_history.gs`          | A daily playlist of 200 random tracks with a 6-day history to prevent repeats.      |
-| `everynoise salsa`, `everynoise bachata`    | `playlists_everynoise.gs`       | (Legacy) Weekly updated playlist with new releases sourced from everynoise.com.     |
-| `* LATEST NEW CHILL VIBES *`                | `playlists_chillhop.gs`         | (Legacy) Weekly updated playlist with new chill/hip-hop releases from everynoise.com. |
-| `everynoise cumbia` (Particle Detector)     | `playlist_particledetector.gs`  | Updated with new releases from Spotify's "Pulse of Cumbia" and "Edge of Cumbia".    |
-| `[zipdj] workbench`                         | `playlists_zipdj.gs`            | A temporary playlist for staging popular, un-archived tracks for review.            |
+| Playlist Name                               | Playlist ID                     | Governing Script                | How It's Managed                                                                      |
+| ------------------------------------------- | ------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
+| [`☆ Bachata Sensual ☆`](https://open.spotify.com/playlist/1nqbNlWFz4hp17Ynn6iquL) | `1nqbNlWFz4hp17Ynn6iquL`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`☆ Bachata Dominicana ☆`](https://open.spotify.com/playlist/6dmOgyY7Tb7c8omYe1j5y4) | `6dmOgyY7Tb7c8omYe1j5y4`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`★ Chansons françaises ★`](https://open.spotify.com/playlist/7dH9IZblZHHaTU093MIt8v) | `7dH9IZblZHHaTU093MIt8v`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`Cumbia`](https://open.spotify.com/playlist/7htbYn8f0q01n5br4XhQR9) | `7htbYn8f0q01n5br4XhQR9`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`Merengue`](https://open.spotify.com/playlist/3Bsz7QecNExg8bsDdW4iGW) | `3Bsz7QecNExg8bsDdW4iGW`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`☆ Reggaeton ☆`](https://open.spotify.com/playlist/6xkeo6Oz8VT1MhJ3nExVlE) | `6xkeo6Oz8VT1MhJ3nExVlE`         | `playlists_simple.gs`           | Daily shuffle of a source playlist.                                                   |
+| [`★ Reggae du jour ★`](https://open.spotify.com/playlist/6kmna7mjnECJ2CV3XQYR2x) | `6kmna7mjnECJ2CV3XQYR2x`         | `playlists_simple.gs`           | Daily refresh with 25 new random tracks from a source.                                |
+| [`♡ Romance en plusieurs langues ♡`](https://open.spotify.com/playlist/6jcCwqV6X2iVrurEcmN1hf) | `6jcCwqV6X2iVrurEcmN1hf`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`Salsa`](https://open.spotify.com/playlist/0o2GXyncPfGLmGSiOqSINx) | `0o2GXyncPfGLmGSiOqSINx`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`★ Soulful Rock ★`](https://open.spotify.com/playlist/6s6sB82xc8GIrtzo4OIz9N) | `6s6sB82xc8GIrtzo4OIz9N`         | `playlists_simple.gs`           | Daily shuffle of a source playlist with artist separation.                            |
+| [`nws - influence`](https://open.spotify.com/playlist/1NBSk4KnLzpqXlOjl6bcJP) | `1NBSk4KnLzpqXlOjl6bcJP`         | `playlists_simple.gs`           | Alternates tracks from 6 different chill/ambient source playlists.                  |
+| [`Bachata`](https://open.spotify.com/playlist/7eufyawBpqQMvsIN4fgQB1) | `7eufyawBpqQMvsIN4fgQB1`         | `playlists_simple.gs`           | Alternates tracks from a modern and a traditional bachata playlist.                 |
+| [`Salsa vs Bachata`](https://open.spotify.com/playlist/27eKRcsYJrHfsP5px09NuR) | `27eKRcsYJrHfsP5px09NuR`         | `playlists_simple.gs`           | Alternates tracks from a combined Bachata and a shuffled Salsa playlist.            |
+| [`[all english]`](https://open.spotify.com/playlist/3XWhltPcZYDWq6MA7H7UvI) | `3XWhltPcZYDWq6MA7H7UvI`         | `playlists_simple.gs`           | Aggregates tracks from multiple genre-specific playlists into one large shuffled list.|
+| [`[all latin]`](https://open.spotify.com/playlist/1WFP39vejsXR3BTPfOGXDS) | `1WFP39vejsXR3BTPfOGXDS`         | `playlists_simple.gs`           | Aggregates tracks from multiple genre-specific playlists into one large shuffled list.|
+| [`Melatone`](https://open.spotify.com/playlist/6b4w2n49x7eVcYu3s90pCN) | `6b4w2n49x7eVcYu3s90pCN`         | `playlists_complex.gs`          | Creates a short, relaxing playlist from 3 different "Melatone" source lists.        |
+| [`Back to sleep`](https://open.spotify.com/playlist/0PYcAZ0kdV5wyjynCcGzIR) | `0PYcAZ0kdV5wyjynCcGzIR`         | `playlists_complex.gs`          | Creates a very short playlist for falling back asleep.                                |
+| [`Latin party mix`](https://open.spotify.com/playlist/672FuqsErGsxloQTpjbXYq) | `672FuqsErGsxloQTpjbXYq`         | `playlists_complex.gs`          | Alternates Cumbia, Salsa, Bachata, Merengue, filtering by track duration.           |
+| [`★ Bachata vs Salsa vs Cumbia ★`](https://open.spotify.com/playlist/2i86j69ApMQVL6Fi4oQ1H0) | `2i86j69ApMQVL6Fi4oQ1H0`         | `playlists_complex.gs`          | Creates a 150-track playlist following a strict BSBSBC pattern.                     |
+| [`Running 180 bpm`](https://open.spotify.com/playlist/3ObKrWDdeEAcO7RxWRMItj) | `3ObKrWDdeEAcO7RxWRMItj`         | `playlists_complex.gs`          | Generates fitness playlists by filtering source tracks by BPM and audio features.     |
+| [`Cycling 80 rpm`](https://open.spotify.com/playlist/3ILZOMnYvRpifSc6By5WfG) | `3ILZOMnYvRpifSc6By5WfG`         | `playlists_complex.gs`          | Generates fitness playlists by filtering source tracks by BPM and audio features.     |
+| [`Fitness 120 bpm`](https://open.spotify.com/playlist/3V6pdBEtDLx49Oz6AYxIQ1) | `3V6pdBEtDLx49Oz6AYxIQ1`         | `playlists_complex.gs`          | Generates fitness playlists by filtering source tracks by BPM and audio features.     |
+| [`🌿🧘 Relax and Focus...`](https://open.spotify.com/playlist/3fDrMMM2stMDiatj729xQM) | `3fDrMMM2stMDiatj729xQM`         | `playlist_artistpromo.gs`       | A promotional playlist combining an artist's tracks with other popular tracks.        |
+| [`Café Con Leche: A Latin Music Blend`](https://open.spotify.com/playlist/1Vx895NFNT4O1S5QeSDpRU) | `1Vx895NFNT4O1S5QeSDpRU`         | `playlist_artistpromo.gs`       | A promotional playlist combining an artist's tracks with other popular tracks.        |
+| [`La playlist d'aujourd'hui`](https://open.spotify.com/playlist/2X3iP4naAyWlgIaIC5vbSB) | `2X3iP4naAyWlgIaIC5vbSB`         | `playlists_history.gs`          | A daily playlist of 200 random tracks with a 6-day history to prevent repeats.      |
+| [`everynoise salsa`](https://open.spotify.com/playlist/2vFImomKbig2xPmEngiFAH) | `2vFImomKbig2xPmEngiFAH`         | `playlists_everynoise.gs`       | (Legacy) Weekly updated playlist with new releases sourced from everynoise.com.     |
+| [`everynoise bachata`](https://open.spotify.com/playlist/6f4LjtkW7i95IB0Pvo0tmC) | `6f4LjtkW7i95IB0Pvo0tmC`         | `playlists_everynoise.gs`       | (Legacy) Weekly updated playlist with new releases sourced from everynoise.com.     |
+| [`everynoise merengue`](https://open.spotify.com/playlist/1l11F6ffJJYWJUfD3yVm5V) | `1l11F6ffJJYWJUfD3yVm5V`         | `playlists_everynoise.gs`       | (Legacy) Weekly updated playlist with new releases sourced from everynoise.com.     |
+| [`everynoise cumbia`](https://open.spotify.com/playlist/5OvN1nZ7z8Z8iwiUSGburb) | `5OvN1nZ7z8Z8iwiUSGburb`         | `playlists_everynoise.gs`       | (Legacy) Weekly updated playlist with new releases sourced from everynoise.com.     |
+| [`* LATEST NEW CHILL VIBES *`](https://open.spotify.com/playlist/09FTQOXMEXdKuZHBsNYW8f) | `09FTQOXMEXdKuZHBsNYW8f`         | `playlists_chillhop.gs`         | (Legacy) Weekly updated playlist with new chill/hip-hop releases from everynoise.com. |
+| `everynoise cumbia` (Particle Detector)     | `5OvN1nZ7z8Z8iwiUSGburb`         | `playlist_particledetector.gs`  | Updated with new releases from Spotify's "Pulse of Cumbia" and "Edge of Cumbia".    |
+| `[zipdj] workbench`                         | `1uLOtPdWnESn9zbgzzZDlh`         | `playlists_zipdj.gs`            | A temporary playlist for staging popular, un-archived tracks for review.            |
 
 ## 6. Script and Trigger Reference
 
