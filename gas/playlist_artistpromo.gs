@@ -238,7 +238,25 @@ function runArtistPromoUpdate() {
       name: '🏯⚖️🧘‍♂️ Shaolin Harmony in Motion: Qigong and Tai Chi Meditation Music (少林气功与太极)',
     },
   };
-  createArtistPromoPlaylist(playlistConfig2, 0);
+  createArtistPromoPlaylist(playlistConfig2, 1);
 
+  /**
+   * La Sonora Volcánica : Café Con Leche: A Latin Music Blend
+   */
+  const playlistConfig3 = {
+    artistPlaylist: {
+      id: '2PTD4rUiyhuU4cuCGoH51S',
+      name: 'lsw - café official',
+    },
+    promoPlaylist: {
+      id: '23J8ffv05PcRjnjuTz87WO',
+      name: 'lsv - café influence',
+    },
+    combinedPlaylist: {
+      id: '1Vx895NFNT4O1S5QeSDpRU',
+      name: 'Café Con Leche: A Latin Music Blend',
+    },
+  };
+  createArtistPromoPlaylist(playlistConfig3, 3);
 
 }
