@@ -64,37 +64,37 @@ The `organisePlaylists()` trigger runs a series of pre-configured playlist tasks
 #### `shufflePlaylist` Workflow
 ```mermaid
 graph TD
-    A((Start)) --> B["Fetch Tracks from Source"];
-    B --> C["Shuffle Tracks"];
+    A[Start] --> B[Fetch Tracks from Source];
+    B --> C[Shuffle Tracks];
     C --> D{Artist Separation?};
-    D -- Yes --> E["Separate Artists"];
+    D -- Yes --> E[Separate Artists];
     D -- No --> F;
-    E --> F["Save to Target Playlist"];
-    F --> G((End));
+    E --> F[Save to Target Playlist];
+    F --> G[End];
 ```
 
 #### `aggregatePlaylists` Workflow
 ```mermaid
 graph TD
-    A((Start)) --> B["For Each Source Playlist..."];
-    B --> C["Fetch Tracks"];
-    C --> D["Combine All Tracks"];
-    D --> E["Shuffle Combined List"];
+    A[Start] --> B[For Each Source Playlist...];
+    B --> C[Fetch Tracks];
+    C --> D[Combine All Tracks];
+    D --> E[Shuffle Combined List];
     E --> F{Artist Separation?};
-    F -- Yes --> G["Separate Artists"];
+    F -- Yes --> G[Separate Artists];
     F -- No --> H;
-    G --> H["Save to Target Playlist"];
-    H --> I((End));
+    G --> H[Save to Target Playlist];
+    H --> I[End];
 ```
 
 #### `alternatePlaylists` Workflow
 ```mermaid
 graph TD
-    A((Start)) --> B["For Each Source Playlist..."];
-    B --> C["Fetch & Shuffle Tracks"];
-    C --> D["Alternate Tracks 1-by-1"];
-    D --> E["Save to Target Playlist"];
-    E --> F((End));
+    A[Start] --> B[For Each Source Playlist...];
+    B --> C[Fetch & Shuffle Tracks];
+    C --> D[Alternate Tracks 1-by-1];
+    D --> E[Save to Target Playlist];
+    E --> F[End];
 ```
 </details>
 
@@ -111,17 +111,17 @@ These functions create highly specific, niche playlists. To use them, edit the h
 
 ```mermaid
 graph TD
-    A((Start)) --> B["For Each Fitness Profile..."];
-    B --> C["Define Parameters<br/>(Target BPM, Duration, Energy, etc.)"];
-    C --> D["Fetch Tracks from Source Playlists"];
-    D --> E["Filter by Audio Features<br/>(Tempo, Energy, Danceability)"];
-    E --> F["Handle Halved/Doubled BPM"];
-    F --> G["Shuffle & Trim to Max Duration"];
+    A[Start] --> B[For Each Fitness Profile];
+    B --> C[Define Parameters];
+    C --> D[Fetch Source Tracks];
+    D --> E[Filter by Audio Features];
+    E --> F[Handle Halved/Doubled BPM];
+    F --> G[Shuffle & Trim to Duration];
     G --> H{Sort by Tempo?};
-    H -- Yes --> I["Sort by Increasing Tempo"];
+    H -- Yes --> I[Sort by Tempo];
     H -- No --> J;
-    I --> J["Save to Target Playlist"];
-    J --> K((End));
+    I --> J[Save to Target Playlist];
+    J --> K[End];
 ```
 </details>
 
@@ -149,24 +149,15 @@ This script is a powerful tool for artists to create a dynamic playlist that str
 
 ```mermaid
 graph TD
-    A((Start)) --> subgraph "1. Fetch & Clean"
-        B["Fetch Artist Tracks"];
-        C["Fetch Promo Tracks"];
-        C --> D["Clean Promo List of Artist's Own Tracks"];
-    end;
-    subgraph "2. Create Crates"
-        B --> E["Split Artist Tracks<br/>(Top 3, Others)"];
-        D --> F["Sort Promo Tracks by Popularity"];
-        F --> G["Split Promo Tracks<br/>(Top 20%, Mid 30%, Low 50%)"];
-    end;
-    subgraph "3. Assemble Playlist"
-        E & G --> H["Assemble Top Section<br/>(Interleave Top 3 Artist Tracks with Promo Tracks)"];
-        H --> I["Assemble Bottom Section<br/>(Shuffle and Mix Remaining Tracks)"];
-    end;
-    I --> J{Validate Track Count};
-    J -- OK --> K["Save to Combined Playlist"];
-    J -- Mismatch --> L((End with Error));
-    K --> M((End));
+    A[Start] --> B[Fetch Artist & Promo Tracks];
+    B --> C[Clean Promo List of Artist Tracks];
+    C --> D[Split Tracks into Crates];
+    D --> E[Assemble Top Section];
+    E --> F[Assemble Bottom Section];
+    F --> G{Validate Track Count};
+    G -- OK --> H[Save Playlist];
+    G -- Mismatch --> I[End with Error];
+    H --> J[End];
 ```
 </details>
 
@@ -180,14 +171,13 @@ graph TD
 
 ```mermaid
 graph TD
-    A((Start)) --> B["Load Previous Tracks from aujourdhui.json"];
-    A --> C["Fetch Tracks from All Source Playlists"];
-    B & C --> D["Remove Previously Used Tracks"];
-    D --> E["Dedup Remaining Tracks"];
-    E --> F["Select 200 Random Tracks"];
-    F --> G["Save to 'La playlist d'aujourd'hui'"];
-    G --> H["Update aujourdhui.json with New Tracks"];
-    H --> I((End));
+    A[Start] --> B[Load History & Fetch Source Tracks];
+    B --> C[Remove Used Tracks];
+    C --> D[Dedup Remaining];
+    D --> E[Select 200 Random];
+    E --> F[Save Playlist];
+    F --> G[Update History];
+    G --> H[End];
 ```
 </details>
 
@@ -204,24 +194,16 @@ graph TD
 
 ```mermaid
 graph TD
-    A((Start)) --> subgraph "1. Fetch New Tracks"
-        B["Fetch from all Particle Detector sources"];
-        B --> C["Dedup New Tracks"];
-    end;
-    subgraph "2. Filter New Tracks"
-        C --> D["Fetch Existing Tracks from Target"];
-        C & D --> E["Remove Existing Tracks"];
-        E --> F["Remove Cached Tracks"];
-        F --> G["Filter by Release Date"];
-    end;
-    subgraph "3. Combine & Save"
-        G --> H["Update Cache with New Tracks"];
-        G & D --> I["Combine New and Existing Tracks"];
-        I --> J["Sort by Release Date"];
-        J --> K["Trim Playlist to History Limit"];
-        K --> L["Save to Target Playlist"];
-    end;
-    L --> M((End));
+    A[Start] --> B[Fetch New Tracks from Sources];
+    B --> C[Dedup New Tracks];
+    C --> D[Fetch Existing Tracks from Target];
+    D --> E[Remove Existing & Cached Tracks];
+    E --> F[Filter by Release Date];
+    F --> G[Update Cache];
+    G --> H[Combine New & Existing];
+    H --> I[Sort by Date & Trim];
+    I --> J[Save Playlist];
+    J --> K[End];
 ```
 </details>
 
