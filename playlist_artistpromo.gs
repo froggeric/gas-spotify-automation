@@ -18,9 +18,7 @@
 function createArtistPromoPlaylist(params) {
   const { artistPlaylist, promoPlaylist, combinedPlaylist } = params;
 
-
   Logger.log(`Starting to build playlist: "${combinedPlaylist.name}"...`);
-
 
   try {
     // =================================================================
@@ -28,7 +26,6 @@ function createArtistPromoPlaylist(params) {
     // =================================================================
     const artistTracks = Source.getTracks([{ id: artistPlaylist.id, name: artistPlaylist.name }]);
     let promoTracksSource = Source.getTracks([{ id: promoPlaylist.id, name: promoPlaylist.name }]);
-
 
     if (!artistTracks || artistTracks.length === 0) {
       Logger.log(`Warning: The artist playlist "${artistPlaylist.name}" is empty or could not be found. Aborting.`);
@@ -39,14 +36,12 @@ function createArtistPromoPlaylist(params) {
       return;
     }
 
-
     // =================================================================
     // NEW: STEP 1.5: CLEAN PROMO PLAYLIST OF ARTIST'S OWN TRACKS
     // This is a critical step to ensure data integrity and prevent logical errors.
     // =================================================================
     const artistId = artistTracks[0].artists[0].id;
     const promoCountBefore = promoTracksSource.length;
-
 
     promoTracksSource = promoTracksSource.filter(track => {
       // A track is kept if NONE of its artists match the main artist's ID.
@@ -58,46 +53,37 @@ function createArtistPromoPlaylist(params) {
       Logger.log(`Cleanup: Removed ${promoCountBefore - promoCountAfter} of your own tracks that were found in the promo playlist.`);
     }
 
-
     const initialTotalTracks = artistTracks.length + promoTracksSource.length;
     Logger.log(`Fetched ${artistTracks.length} tracks from artist playlist and ${promoTracksSource.length} (after cleanup) from promo playlist. Total: ${initialTotalTracks}`);
-
 
     // =================================================================
     // STEP 2: CREATE "CRATES" (COLLECTIONS OF TRACKS)
     // =================================================================
 
-
     // --- Artist Crates ---
     const top3ArtistTracks = Selector.sliceFirst(artistTracks, 3);
     const otherArtistTracks = Selector.sliceAllExceptFirst(artistTracks, 3);
-
 
     // --- Promo Crates (based on popularity) ---
     // First, sort all promo tracks by popularity in descending order.
     // The Order.sort function handles fetching full track objects with popularity data.
     Order.sort(promoTracksSource, 'meta.popularity', 'desc');
 
-
     const totalPromoTracks = promoTracksSource.length;
     const topCount = Math.ceil(totalPromoTracks * 0.20);
     const midCount = Math.ceil(totalPromoTracks * 0.30);
-
 
     const topTracks = Selector.sliceFirst(promoTracksSource, topCount);
     const midTracks = promoTracksSource.slice(topCount, topCount + midCount);
     const lowTracks = Selector.sliceAllExceptFirst(promoTracksSource, topCount + midCount);
 
-
     Logger.log(`Created promo crates: Top(${topTracks.length}), Mid(${midTracks.length}), Low(${lowTracks.length})`);
-
 
 
     // =================================================================
     // STEP 3: BUILD THE FINAL PLAYLIST - TOP SECTION
     // =================================================================
     const finalTracks = [];
-
 
     // Helper to safely remove a track from its original crate by its ID
     const removeFromCrates = (trackId) => {
@@ -123,18 +109,14 @@ function createArtistPromoPlaylist(params) {
     };
 
 
-
     // Rule 1: One random track from "top tracks"
     finalTracks.push(...pickRandomFrom([topTracks], 1));
-
 
     // Rule 2: First artist track
     if (top3ArtistTracks.length > 0) finalTracks.push(top3ArtistTracks.shift());
 
-
     // Rule 3: Two random from "top" & "mid"
     finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2));
-
 
     // Rule 4: Second artist track
     if (top3ArtistTracks.length > 0) finalTracks.push(top3ArtistTracks.shift());
@@ -142,29 +124,23 @@ function createArtistPromoPlaylist(params) {
     // Rule 5: Two random from "top" & "mid"
     finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2));
 
-
     // Rule 6: Third artist track
     if (top3ArtistTracks.length > 0) finalTracks.push(top3ArtistTracks.shift());
 
-
     // Rule 7: Two random from "top" & "mid"
     finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2));
-
 
 
     // =================================================================
     // STEP 4: BUILD THE FINAL PLAYLIST - BOTTOM SECTION
     // =================================================================
 
-
     // Combine all remaining promo tracks into a single shuffled crate
     const promoTracksBottom = Combiner.push([], topTracks, midTracks, lowTracks);
     Order.shuffle(promoTracksBottom);
 
-
     // Shuffle the remaining artist tracks
     Order.shuffle(otherArtistTracks);
-
 
     // Insert the remaining artist tracks one by one into the promo tracks crate
     // with a random interval of 2-4 promo tracks between each.
@@ -184,15 +160,12 @@ function createArtistPromoPlaylist(params) {
       insertionIndex++; // Move index past the newly inserted track
     }
 
-
     // Append the fully mixed bottom section to the final playlist
     Combiner.push(finalTracks, promoTracksBottom);
-
 
     // =================================================================
     // STEP 5: VALIDATE AND SAVE THE PLAYLIST
     // =================================================================
-
 
     // Critical Validation: Ensure no tracks were lost during processing.
     if (finalTracks.length !== initialTotalTracks) {
@@ -202,9 +175,7 @@ function createArtistPromoPlaylist(params) {
       return; 
     }
 
-
     Logger.log(`Successfully prepared ${finalTracks.length} tracks. All tracks accounted for. Saving to Spotify...`);
-
 
     // This is the only function that modifies the live playlist.
     // It replaces all existing tracks with the new, carefully constructed list.
@@ -214,9 +185,7 @@ function createArtistPromoPlaylist(params) {
       tracks: finalTracks,
     });
 
-
     Logger.log(`Playlist "${combinedPlaylist.name}" has been successfully updated.`);
-
 
   } catch (e) {
     // If any error occurs above, this block is executed.
@@ -225,28 +194,50 @@ function createArtistPromoPlaylist(params) {
   }
 }
 
-
 /**
  * EXAMPLE USAGE:
  * This function demonstrates how to call createArtistPromoPlaylist.
  * It should be triggered by a time-based scheduler in Google Apps Script.
  */
 function runArtistPromoUpdate() {
-  const playlistConfig = {
+
+  /**
+   * Neurological Waves Science : 🌿🧘 Relax and Focus: Serene Melodies for Work, Study and Chill
+   */
+  const playlistConfig1 = {
     artistPlaylist: {
-      id: '6ZIvOEeO2aLaeZp0bcYBTV',    // <-- Replace with actual ID
-      name: 'nws - official',              // <-- Replace with actual Name
+      id: '6ZIvOEeO2aLaeZp0bcYBTV',
+      name: 'nws - official',
     },
     promoPlaylist: {
-      id: '1NBSk4KnLzpqXlOjl6bcJP',     // <-- Replace with actual ID
-      name: 'nws - influence',             // <-- Replace with actual Name
+      id: '1NBSk4KnLzpqXlOjl6bcJP',
+      name: 'nws - influence',
     },
     combinedPlaylist: {
-      id: '3fDrMMM2stMDiatj729xQM',  // <-- Replace with actual ID
-      name: '🌿🧘 Relax and Focus: Serene Melodies for Work, Study and Chill',          // <-- Replace with actual Name
+      id: '3fDrMMM2stMDiatj729xQM',
+      name: '🌿🧘 Relax and Focus: Serene Melodies for Work, Study and Chill',
     },
   };
+  createArtistPromoPlaylist(playlistConfig1);
+
+  /**
+   * Neurological Waves Science : 🏯⚖️🧘‍♂️ Shaolin Harmony in Motion: Qigong and Tai Chi Meditation Music (少林气功与太极)
+   */
+  const playlistConfig2 = {
+    artistPlaylist: {
+      id: '2Kwytl8APVhZVFaX6ClyRW',
+      name: 'nsw - qigong official',
+    },
+    promoPlaylist: {
+      id: '4XbzUL39p243cRjXqw26yG',
+      name: 'nsw - qigong influence',
+    },
+    combinedPlaylist: {
+      id: '4imxKpvlV2XfbCYaBeqRYO',
+      name: '🏯⚖️🧘‍♂️ Shaolin Harmony in Motion: Qigong and Tai Chi Meditation Music (少林气功与太极)',
+    },
+  };
+  createArtistPromoPlaylist(playlistConfig2);
 
 
-  createArtistPromoPlaylist(playlistConfig);
 }
