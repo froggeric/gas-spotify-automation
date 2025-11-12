@@ -3,7 +3,7 @@
 //  Bachata vs Salsa vs Cumbia
 //  Back to sleep
 //  Latin Party Mix
-//  Running playlists
+//  Fitness playlists
 
 // Melatone
 // Concatenated tracks from 3 playlists
@@ -212,55 +212,120 @@ function createBachataSalsaCumbia() {
 
 }
 
-// Running playlists
-// Sources: merengue, cumbia, reggaeton
+// Fitness playlists
+// Sources: merengue, cumbia, reggaeton (running)
+// Sources: merengue, cumbia, reggaeton, bachata, latin pop, all reggae, all english (cycling)
 // filtered on bpm (including halved) and energy
-function createRunningPlaylists() {
+function createFitnessPlaylists() {
 
+  let today = (new Date()).toISOString().split('T')[0];
+
+  // Running 180 bpm
+  let name = 'Running 180 bpm (daily update)';
+  let id = '3ObKrWDdeEAcO7RxWRMItj';
+  let description = "[DAILY REFRESH " + today + "] 90 minutes of latin songs for running, around the 180 BPM range (including halved BPM). Selected from my Cumbia, Merengue and Reggaeton playlists. Sorted by increasing tempo.";
   let durationMax = 90;    // max duration in minutes of the final playlist
   let bpmTarget = 180;     // 180 BPM is the recemmended number of steps per minute for running
   let bpmDeviation = 0.15; // BPM range will be 15% of the target, centered around the target BPM
-  let today = (new Date()).toISOString().split('T')[0];
-
+  let tracks = [];
   // Source playlists
-  let tracksCumbia = FilterRunningPlaylist('<!>Cumbia [archive]', '1hSmpmZbgkoGpcIrCU9rpF', bpmTarget, bpmDeviation);
-  let tracksMerengue = FilterRunningPlaylist('<!>Merengue [archive]', '0W2lVKgN2AbsFus2RIAiHz', bpmTarget, bpmDeviation);
-  let tracksReggaeton = FilterRunningPlaylist('<!>Reggaeton [archive]', '1UoWJkPDZbNwuvNYrH6JRu', bpmTarget, bpmDeviation);
+  let energyMin = 0.4;     // minimum energy of tracks to keep
+  let energyMax = 1.0;     // maximum energy of tracks to keep
+  let danceMin = 0;        // minimum danceability of tracks to keep
+  let valenceMin = 0;      // minimum valence of tracks to keep
+  let happinessMin = 0;    // minimum happiness of tracks to keep
+  let angerMax = 1;        // maximum anger of tracks to keep
+  let sadnessMax = 1;      // maximum sadness of tracks to keep
+  let tracksEnglish = FilterFitnessPlaylist('[all english]', '3XWhltPcZYDWq6MA7H7UvI');
+  let tracksCumbia = FilterFitnessPlaylist('<!>Cumbia [archive]', '1hSmpmZbgkoGpcIrCU9rpF');
+  let tracksMerengue = FilterFitnessPlaylist('<!>Merengue [archive]', '0W2lVKgN2AbsFus2RIAiHz');
+  let tracksReggaeton = FilterFitnessPlaylist('<!>Reggaeton [archive]', '1UoWJkPDZbNwuvNYrH6JRu');
+  Combiner.push(tracks, tracksCumbia, tracksMerengue, tracksReggaeton);
+  // Shuffle, extract duration, and save playlist
+  SaveFitnessPlaylist( name, id, tracks, description);
+
+  // Cycling 80 rpm
+  name = 'Cycling 80 rpm (daily update)';
+  id = '3ILZOMnYvRpifSc6By5WfG';
+  description = "[DAILY REFRESH " + today + "] 3 hours of songs for cycling, around the 80 BPM range (including doubled BPM). Selected from my cumbia, bachata, reggaeton, merengue and latin pop playlists."
+  durationMax = 180;   // max duration in minutes of the final playlist
+  bpmTarget = 160;     // 80 rpm is the recemmended number of steps per minute for running
+  bpmDeviation = 0.20  // BPM range will be 20% of the target, centered around the target BPM
+  tracks = [];
+  // LATIN source playlists
+  energyMin = 0.4;     // minimum energy of tracks to keep
+  energyMax = 1.0;     // maximum energy of tracks to keep
+  danceMin = 0;        // minimum danceability of tracks to keep
+  valenceMin = 0;      // minimum valence of tracks to keep
+  happinessMin = 0;    // minimum happiness of tracks to keep
+  angerMax = 1;        // maximum anger of tracks to keep
+  sadnessMax = 1;      // maximum sadness of tracks to keep
+  tracksCumbia = FilterFitnessPlaylist('<!>Cumbia [archive]', '1hSmpmZbgkoGpcIrCU9rpF');
+  tracksMerengue = FilterFitnessPlaylist('<!>Merengue [archive]', '0W2lVKgN2AbsFus2RIAiHz');
+  tracksReggaeton = FilterFitnessPlaylist('<!>Reggaeton [archive]', '1UoWJkPDZbNwuvNYrH6JRu');
+  let tracksBachata = FilterFitnessPlaylist('Bachata', '7eufyawBpqQMvsIN4fgQB1');
+  let tracksLatinPop = FilterFitnessPlaylist('Latin pop', '7qYD0PW41lQwWXLRY79D2n');
+  Combiner.push(tracks, tracksCumbia, tracksMerengue, tracksReggaeton, tracksBachata, tracksLatinPop);
+  // Shuffle, extract duration, and save playlist
+  SaveFitnessPlaylist( name, id, tracks, description, false );
+
+  // Fitness 120 bpm
+  name = 'Fitness 120 bpm (daily update)';
+  id = '3V6pdBEtDLx49Oz6AYxIQ1';
+  description = "[DAILY REFRESH " + today + "] 1 hour of songs for cardio and calisthenics, around the 120 BPM range (including halved BPM). Selected from my reggae, and english playlists."
+  durationMax = 80;   // max duration in minutes of the final playlist
+  bpmTarget = 120;     // 80 rpm is the recemmended number of steps per minute for running
+  bpmDeviation = 0.20  // BPM range will be 20% of the target, centered around the target BPM
+  tracks = [];
+  // // REGGAE source playlist
+  energyMin = 0.5;     // minimum energy of tracks to keep
+  energyMax = 1.0;     // maximum energy of tracks to keep
+  danceMin = 0;        // minimum danceability of tracks to keep
+  valenceMin = 0;      // minimum valence of tracks to keep
+  happinessMin = 0;    // minimum happiness of tracks to keep
+  angerMax = 1;        // maximum anger of tracks to keep
+  sadnessMax = 1;      // maximum sadness of tracks to keep
+  let tracksReggae = FilterFitnessPlaylist('[all reggae]', '4gf91RHNDtzuXM7HgfzVUD');
+  Combiner.push(tracks, tracksReggae);
+  // ENGLISH source playlist
+  energyMin = 0.75;    // minimum energy of tracks to keep
+  energyMax = 1.0;     // maximum energy of tracks to keep
+  danceMin = 0.5;      // minimum danceability of tracks to keep
+  valenceMin = 0;      // minimum valence of tracks to keep
+  happinessMin = 0;    // minimum happiness of tracks to keep
+  angerMax = 1;        // maximum anger of tracks to keep
+  sadnessMax = 1;      // maximum sadness of tracks to keep
+  tracksEnglish = FilterFitnessPlaylist('[all english]', '3XWhltPcZYDWq6MA7H7UvI');
+  Combiner.push(tracks, tracksEnglish);
+  // Shuffle, extract duration, and save playlist
+  SaveFitnessPlaylist( name, id, tracks, description, false );
+
+  // Yoga
+  // name = 'Yoga (daily update)';
+  // id = '1ruY45aZSITo1NnS9IiNWn';
+  // description = "[DAILY REFRESH " + today + "] Experimental Yoga playlist"
+  // durationMax = 3600;  // max duration in minutes of the final playlist
+  // bpmTarget = 110;     // middle point of 100-120
+  // bpmDeviation = 0.11  // 89% to 111% of targe BPM
+  // tracks = [];
+  // ENGLISH and REGGAE source playlist
+  // energyMin = 0.1;       // minimum energy of tracks to keep
+  // energyMax = 0.7;       // maximum energy of tracks to keep
+  // danceMin = 0.2;        // minimum danceability of tracks to keep
+  // danceMax = 0.7;        // minimum danceability of tracks to keep
+  // valenceMin = 0.2;      // minimum valence of tracks to keep
+  // happinessMin = 0.2;    // minimum happiness of tracks to keep
+  // angerMax = 0.6;        // maximum anger of tracks to keep
+  // sadnessMax = 0.6;      // maximum sadness of tracks to keep
+  // tracksEnglish = FilterFitnessPlaylist('[all english]', '3XWhltPcZYDWq6MA7H7UvI');
+  // Combiner.push(tracks, tracksEnglish);
+  // tracksReggae = FilterFitnessPlaylist('[all reggae]', '4gf91RHNDtzuXM7HgfzVUD');
+  // Combiner.push(tracks, tracksReggae);
+  // // Shuffle, extract duration, and save playlist
+  // SaveFitnessPlaylist( name, id, tracks, description, false );
  
-  // ► ¡Corre! ►
-  let name = '► ¡Corre! ►';
-  let id = '3ObKrWDdeEAcO7RxWRMItj';
-  let description = "[DAILY REFRESH " + today + "] 90 minutes of latin songs for running, around the 180 BPM range (including halved BPM). Selected from my Cumbia, Merengue and Reggaeton playlists. Sorted by increasing tempo.";
-  // Make a copy of the cumbia playlist as a starting point
-  let tracks = Selector.sliceCopy(tracksCumbia);
-  // Add the merengue and reggaeton playlists
-  Combiner.push(tracks, tracksMerengue, tracksReggaeton);
-  // Shuffle, extract duration, and save playlist
-  SaveRunningPlaylist( name, id, tracks, description);
 
-  // ► run: Cumbia ►
-  name = '► run: Cumbia ►';
-  id = '7ufkYNx8uyiHA1uDrH1ca3';
-  description = "[DAILY REFRESH " + today + "] 90 minutes of cumbia songs for running, around the 180 BPM range. Sorted by increasing tempo."
-  // Shuffle, extract duration, and save playlist
-  SaveRunningPlaylist( name, id, tracksCumbia, description);
-
-  // ► run: Merengue ►
-  name = '► run: Merengue ►';
-  id = '5CzTxbjBq7GYCyyPaaRmMY';
-  description = "[DAILY REFRESH " + today + "] 90 minutes of merengue songs for running, around the 180 BPM range.  Sorted by increasing tempo."
-  // Shuffle, extract duration, and save playlist
-  SaveRunningPlaylist( name, id, tracksMerengue, description);
-
-  // ► run: Reggaeton ►
-  name = '► run: Reggaeton ►';
-  id = '0Bul5uwXpAZsNQB3RgNlDE';
-  description = "[DAILY REFRESH " + today + "] 90 minutes of reggaeton songs for running, around the 180 BPM range. Sorted by increasing tempo."
-  // Shuffle, extract duration, and save playlist
-  SaveRunningPlaylist( name, id, tracksReggaeton, description);
-
-
-  function FilterRunningPlaylist( name, id, bpmTarget = 180, bpmDeviation = 0.15 ) {
+  function FilterFitnessPlaylist( name, id) {
 
     let bpmMargin = bpmTarget*bpmDeviation/2; // half percentage of BPM deviation to -/+ around the target
     let bpmMin = bpmTarget - bpmMargin;       // minimum BPM of tracks to keep
@@ -297,20 +362,31 @@ function createRunningPlaylists() {
 
   function FilterByTempo( tracks, bpmMin, bpmMax, multiplier = 1 ) {
 
-    let energyMin = 0.4;  // minimum energy of tracks to keep
-    let energyMax = 1.0;  // maximum energy of tracks to keep
+    let danceMax = 1.0;     // maximum danceability of tracks to keep
+    let valenceMax = 1.0;   // maximum valence of tracks to keep
+    let happinessMax = 1.0; // maximum happiness of tracks to keep
+    let angerMin = 0.0;     // minimum anger of tracks to keep
+    let sadnessMin = 0.0;   // minimum sadness of tracks to keep
 
     // Only keep tracks tracks within the desired BPM range
     // Only keep tracks with sufficient energy
+    // anger     = energy * (1 - valence);
+    // happiness = energy * valence;
+    // sadness   =  (1 - energy) * (1 - valence);
     Filter.rangeTracks(tracks, {
       features: {
         tempo: { min: bpmMin, max: bpmMax },
-        energy: { min: energyMin, max: energyMax }
+        energy: { min: energyMin, max: energyMax },
+        danceability: { min: danceMin, max: danceMax },
+        valence: { min: valenceMin, max: valenceMax },
+        happiness: { min: happinessMin, max: happinessMax },
+        anger: { min: angerMin, max: angerMax },
+        sadness: { min: sadnessMin, max: sadnessMax },
       }
     });
 
     // Add tempo information to tracks
-    // Since the audio features have alredy been queried during the filtering,
+    // Since the audio features have already been queried during the filtering,
     // goofy keeps them in the cache, and we can retrieve the whole cache content
     let cache = getCachedTracks(tracks, { features: {} }).features;
     let cachedItems = Object.values(cache);
@@ -334,7 +410,7 @@ function createRunningPlaylists() {
   }
 
 
-  function SaveRunningPlaylist( name, id, tracks, description) {
+  function SaveFitnessPlaylist( name, id, tracks, description, sorted = true ) {
  
     // dedup and shuffle tracks, before only keeping up to the maximum duration
     Filter.dedupTracks(tracks);
@@ -345,10 +421,12 @@ function createRunningPlaylists() {
 
     Logger.log("Creating custom playlist: " + name + ' (kept ' + saved + '/' + total + ' tracks)');
 
-    // Sort by increasing tempo
-    tracks.sort((x, y) => {
-        return x.tempo - y.tempo;
-    });
+    if (sorted) {
+      // Sort by increasing tempo
+      tracks.sort((x, y) => {
+          return x.tempo - y.tempo;
+      });
+    }
 
     // for (let y = 0; y < tracks.length; y++) {
     //   Logger.log( tracks[y].tempo + ' ' + tracks[y].name);
