@@ -239,6 +239,7 @@ graph TD
 | `★ Bachata vs Salsa vs Cumbia ★`              | `playlists_complex.gs`          | Creates a 150-track playlist following a strict BSBSBC pattern.                     |
 | `Running 180 bpm`, `Cycling 80 rpm`, etc.   | `playlists_complex.gs`          | Generates fitness playlists by filtering source tracks by BPM and audio features.     |
 | `🌿🧘 Relax and Focus...` (Promo)             | `playlist_artistpromo.gs`       | A promotional playlist combining an artist's tracks with other popular tracks.        |
+| `Café Con Leche: A Latin Music Blend` (Promo) | `playlist_artistpromo.gs`       | A promotional playlist combining an artist's tracks with other popular tracks.        |
 | `La playlist d'aujourd'hui`                 | `playlists_history.gs`          | A daily playlist of 200 random tracks with a 6-day history to prevent repeats.      |
 | `everynoise salsa`, `everynoise bachata`    | `playlists_everynoise.gs`       | (Legacy) Weekly updated playlist with new releases sourced from everynoise.com.     |
 | `* LATEST NEW CHILL VIBES *`                | `playlists_chillhop.gs`         | (Legacy) Weekly updated playlist with new chill/hip-hop releases from everynoise.com. |
