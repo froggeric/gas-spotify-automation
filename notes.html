@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    def playlist_new_chill_vibes():
+  # dates of previous everynoise weekly releases we want to retrieve
+  dates = ["20230210","20230203","20230127","20230120","20230113","20230106","20221230"]
+  #dates = ["20220520","20220513","20220506","20220429","20220422","20220415","20220408","20220401","20220325","20220318","20220311","20220304","20220225","20220218","20220211","20220204","20220128","20220121","20220114","20220107"]
+  #dates = ["20211001","20210924","20210917","20210910","20210903","20210827","20210820","20210813","20210806","20210730","20210723","20210716"]
+  #dates = ["20210702","20210625"]
+  #dates = ["20210702","20210625","20210618","20210611","20210604","202100528","20210521","20210514","20210507","20210430","20210423","20210416","20210409","20210402","20210326","20210319","20210312","20210305"]
+  #dates = ["20210219","20210212","20210205","20210129","20210122","20210115","20210108","20210101"]
+
+  url = [
+    #('latest chill r&b + chillhop - no duplicates, no similar genres', "http://everynoise.com/new_releases_by_genre.cgi?genre=chill%20r%26b%2Cchillhop%2Cbedroom%20soul%2Cchill%20pop%2Cchill%20beats&region=US&hidedupes=on"),
+    ('latest conscious hip hop + gospel rap - no duplicates, no similar genres', "https://everynoise.com/new_releases_by_genre.cgi?genre=conscious%20hip%20hop%2Cgospel%20rap&region=US&hidedupes=on")#,
+    #('latest nu-cumbia + golden age hip-hop', "https://everynoise.com/new_releases_by_genre.cgi?genre=nu-cumbia%2Cgolden%20age%20hip%20hop&region=US&hidedupes=on"),
+    #('latest neo soul + quiet storm', "https://everynoise.com/new_releases_by_genre.cgi?genre=neo%20soul%2Cquiet%20storm&region=US&hidedupes=on"),
+    #('hip hop + jazz rap','https://everynoise.com/new_releases_by_genre.cgi?genre=hip%20hop%2Cjazz%20rap&region=US&hidedupes=on')
+  ]
+  #url = [
+  #  ('latest nu-cumbia + golden age hip-hop', "https://everynoise.com/new_releases_by_genre.cgi?genre=nu-cumbia%2Cgolden%20age%20hip%20hop&region=US&hidedupes=on")
+  #]
+  albums = []
+  for source in url:
+    name = source[0]
+    link = source[1]
+    print(name)
+    soup = parse_webpage(link)
+    albums += extract_spotifylinks(soup, banned_songs, banned_artists)
+    # ... previous releases ...
+    for date in dates:
+      print(date)
+      soup = parse_webpage(link + "&date="+ date)
+      albums += extract_spotifylinks(soup, banned_songs, banned_artists)
+
+  tracks = convert_albumlist_to_tracklist_filtered(spotify, albums)     # returns a list of tuple: (popularity, track_uri)
+  tracks.sort(reverse=True)                           # sort by most popular first
+  tracks = tracks[:300]                               # keep only the top 300 tracks
+  tracks = [uri[1] for uri in tracks]                 # convert the tuple list into a list of the tracks uri
+
+  # new Chill Vibes
+  add_tracks_to_playlist(spotify, 'spotify:playlist:09FTQOXMEXdKuZHBsNYW8f', tracks)
+  track_items = get_playlist_tracks(spotify, 'spotify:playlist:09FTQOXMEXdKuZHBsNYW8f')
+  track_items = deduplicate_tracks(track_items) 
+  overwrite_playlist(spotify, 'spotify:playlist:09FTQOXMEXdKuZHBsNYW8f', track_items)
+
+
+
+            if filter == 'chillhop':
+                # audio features for filtering
+                audio_features = spotify.audio_features(uri)
+                if audio_features != [None]:
+                    track_energy = audio_features[0]['energy']
+                    track_instrumentalness = audio_features[0]['instrumentalness']
+                    track_speechiness = audio_features[0]['speechiness']
+                    # only keep track with a minimum energy level, likelihood of not being instrumental, and not too much spoken like vocals
+                    if track_energy > 0.3 and track_energy < 0.7 and track_instrumentalness < 0.5 and track_speechiness < 0.15:
+                        # add track to our track list
+                        tuple = (popularity,uri)
+                        all_tracks += [tuple]
+                        #print(popularity, '(', artist_popularity,album_popularity,track_popularity,') (e=',  int(float(100*track_energy)), ') (i=', int(float(100*track_instrumentalness)),') (s=',  int(float(100*track_speechiness)), '),   ',track_details['artists'][0]['name'], ',', track_details['name'])
+
+  </body>
+</html>
