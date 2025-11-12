@@ -16,7 +16,7 @@ function organisePlaylists() {
 
       // Bachata Moderna
       shufflePlaylist({
-        name: '☆ Bachata moderna ☆',
+        name: '☆ Bachata Sensual ☆',
         description: "[DAILY SHUFFLE " + today + "]  Manually curated, with modern bachata songs, usually slower and more orchestrated with electric instruments, than traditional bachata.",
         sourceid: '5EDacPfFnTVVw6jJiXGRGC', 
         targetid: '1nqbNlWFz4hp17Ynn6iquL',
@@ -25,7 +25,7 @@ function organisePlaylists() {
 
       // Bachata Tradicional
       shufflePlaylist({
-        name: '☆ Bachata tradicional ☆',
+        name: '☆ Bachata Dominicana ☆',
         description: "[DAILY SHUFFLE " + today + "] Manually curated, with traditional bachata songs, featuring a usually faster rythm, with more guitar.",
         sourceid: '5Rtc7DqGIj9H1yBhhgdgN6', 
         targetid: '6dmOgyY7Tb7c8omYe1j5y4',
@@ -48,6 +48,13 @@ function organisePlaylists() {
         sourceid: '1hSmpmZbgkoGpcIrCU9rpF', 
         targetid: '7htbYn8f0q01n5br4XhQR9',
         separation: 4,
+      });
+
+      // Cumbia Instruméntales
+      shufflePlaylist({ 
+        name: 'Cumbia Instruméntales',
+        description: "[DAILY SHUFFLE " + today + "]",
+        sourceid: '2PrIjEASRTjDhYY3Ujtdzd', 
       });
 
       // ★ Latin Chill ★
@@ -148,6 +155,21 @@ function organisePlaylists() {
         separation: 3,
       });
 
+      // Tai Chi & Qi Gong
+      // shufflePlaylist({
+      //   name: '🏯⚖️🧘‍♂️ Shaolin Harmony in Motion: Qigong and Tai Chi Meditation Music (少林气功与太极)',
+      //   description: "[DAILY SHUFFLE " + today + "] Relax, focus, and find balance with Shaolin Qigong and Tai Chi music (少林气功与太极). Perfect for meditation, studying, working, or unwinding, these serene Chinese melodies bring harmony, calm, and mindfulness to your day. Experience the authentic sounds of Shaolin wisdom. 🏯⚖️🧘‍♂️",
+      //   sourceid: '4imxKpvlV2XfbCYaBeqRYO', 
+        // separation: 4,
+      // });
+
+      // Yogasthenics
+      // shufflePlaylist({
+      //   name: 'Yogasthenics',
+      //   description: "[DAILY SHUFFLE " + today + "]",
+      //   sourceid: '632redXHfMP9fQsFmJawpP', 
+      // });
+
     //// ARTIST PLAYLIST SHUFFLE ////
 
       // Beatles
@@ -190,13 +212,14 @@ function organisePlaylists() {
 
     //// MULTIPLE PLAYLISTS ALTERNATED ////
 
-      // Chillax : <!>Melatone 4 acoustic chill + <!>Melatone 5 chilltronic
+      // Chillax : <!>Melatone 4 acoustic chill + <!>Melatone 5 chilltronic + <!>Melatone 1 relax + Neurological Waves Science + Tai Chi & Qigong + Promo Chillax
       alternatePlaylists({
-        name: '※ Chillax ※',
-        description: "[DAILY SHUFFLE " + today + "]",
-        playlists: ['49dOZG0Sys092mt1YtRmot', '3nG6oYuH9mScge1RFqrFap'],
-        targetid: '3fDrMMM2stMDiatj729xQM',
+        name: 'nws - influence',
+        description: "Relax & focus with serene melodies designed for work, study, chillout, and relaxation. Perfect background music for productivity, calming moments, yoga, and mindfulness. Whether you're studying, working, or meditating, this playlist will enhance your focus and peace of mind.",
+        playlists: ['49dOZG0Sys092mt1YtRmot', '3nG6oYuH9mScge1RFqrFap', '4ydomBoG4tHzp1ekls1rSd', '4g5XhSGUFWaOigZo5gEOlH', '4imxKpvlV2XfbCYaBeqRYO', '7sJK5D3jCNI3vdYm5dM2Lc'],
+        targetid: '1NBSk4KnLzpqXlOjl6bcJP',
         toLimitOn: false,
+        count: 100,
       });
 
       // Bachata : <!>Bachata moderna [archive] + <!>Bachata tradicional [archive]
