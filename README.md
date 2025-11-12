@@ -133,14 +133,18 @@ This script is a powerful tool for artists to create a dynamic playlist that str
     1.  **The Artist Playlist:** Contains only your own tracks. The first three are treated as top priority.
     2.  **The Promo Playlist:** A hand-picked collection of tracks from other artists you want to be associated with.
     3.  **The Combined Playlist:** The final, public-facing playlist. The script starts it with a popular track, weaves your top 3 tracks into the beginning, and then intelligently distributes the rest of your music throughout the remainder of the playlist.
-*   **How to use:** Edit the `runArtistPromoUpdate` function. Create `playlistConfig` objects for each promotional playlist you want to manage, replacing the placeholder IDs and names with your own.
+*   **How to use:** Edit the `runArtistPromoUpdate` function. The `createArtistPromoPlaylist` function now accepts an optional second parameter, `extraInterval` (an integer from 0-9), which increases the number of promotional tracks in the playlist.
     ```javascript
     const playlistConfig1 = {
       artistPlaylist: { id: 'YOUR_ARTIST_PLAYLIST_ID', name: 'Your Artist Playlist Name' },
       promoPlaylist: { id: 'YOUR_PROMO_PLAYLIST_ID', name: 'Your Promo Playlist Name' },
       combinedPlaylist: { id: 'YOUR_COMBINED_PLAYLIST_ID', name: 'Your Final Playlist Name' },
     };
-    createArtistPromoPlaylist(playlistConfig1);
+    // This call uses the default interval.
+    createArtistPromoPlaylist(playlistConfig1, 0);
+
+    // This call adds 2 extra promo tracks at each insertion point.
+    createArtistPromoPlaylist(playlistConfig2, 2);
     ```
 *   **Strategy & SEO:** The script's original documentation includes a detailed guide on optimizing your playlist's title, description, and cover art for discovery on Spotify, including AI prompts to help brainstorm assets. This information has been preserved in `gas/playlist_artistpromo.md`.
 

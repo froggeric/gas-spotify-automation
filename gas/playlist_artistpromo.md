@@ -33,7 +33,7 @@ This is the final, public-facing playlist that the script generates. On each run
 
 To use the script, you only need to edit the `runDailyPlaylistUpdate` function. This function is the main entry point that you will schedule to run automatically in Google Apps Script.
 
-Inside this function, you'll find `playlistConfig` objects. Simply replace the placeholder IDs and names with the actual information from your Spotify playlists. You can copy and paste the `playlistConfig` block to automate as many different promotional playlists as you need.
+Inside this function, you'll find `playlistConfig` objects. Simply replace the placeholder IDs and names with the actual information from your Spotify playlists. The `createArtistPromoPlaylist` function also accepts an optional second parameter, `extraInterval` (an integer from 0-9), which increases the number of promotional tracks that are placed before and between your own songs.
 
 ```javascript
 /**
@@ -57,7 +57,8 @@ function runDailyPlaylistUpdate() {
       name: 'Indie Rock Discoveries | feat. Starlight Runner',
     },
   };
-  createArtistPromoPlaylist(indieRockConfig);
+  // This call uses the default interval (0 extra promo tracks).
+  createArtistPromoPlaylist(indieRockConfig, 0);
 
 
   // Example 2: A secondary, mood-based playlist for a chillwave artist
@@ -75,7 +76,8 @@ function runDailyPlaylistUpdate() {
       name: 'Midnight Drive 🌴 Chillwave & Dream Pop',
     },
   };
-  createArtistPromoPlaylist(chillwaveConfig);
+  // This call adds 2 extra promo tracks at each insertion point.
+  createArtistPromoPlaylist(chillwaveConfig, 2);
 }
 ```
 

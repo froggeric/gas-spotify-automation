@@ -14,11 +14,12 @@
  * @property {object} params.promoPlaylist - The playlist containing tracks from other artists for promotion.
  * @property {object} params.combinedPlaylist - The target playlist to be updated. Its existing content will be replaced.
  *           Its name, description, and cover art will be preserved.
+ * @param {number} [extraInterval=0] - An optional integer to increase the number of promo tracks.
  */
-function createArtistPromoPlaylist(params) {
+function createArtistPromoPlaylist(params, extraInterval = 0) {
   const { artistPlaylist, promoPlaylist, combinedPlaylist } = params;
 
-  Logger.log(`Starting to build playlist: "${combinedPlaylist.name}"...`);
+  Logger.log(`Starting to build playlist: "${combinedPlaylist.name}" with extra interval: ${extraInterval}...`);
 
   try {
     // =================================================================
@@ -110,25 +111,25 @@ function createArtistPromoPlaylist(params) {
 
 
     // Rule 1: One random track from "top tracks"
-    finalTracks.push(...pickRandomFrom([topTracks], 1));
+    finalTracks.push(...pickRandomFrom([topTracks], 1 + extraInterval));
 
     // Rule 2: First artist track
     if (top3ArtistTracks.length > 0) finalTracks.push(top3ArtistTracks.shift());
 
     // Rule 3: Two random from "top" & "mid"
-    finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2));
+    finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2 + extraInterval));
 
     // Rule 4: Second artist track
     if (top3ArtistTracks.length > 0) finalTracks.push(top3ArtistTracks.shift());
     
     // Rule 5: Two random from "top" & "mid"
-    finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2));
+    finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2 + extraInterval));
 
     // Rule 6: Third artist track
     if (top3ArtistTracks.length > 0) finalTracks.push(top3ArtistTracks.shift());
 
     // Rule 7: Two random from "top" & "mid"
-    finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2));
+    finalTracks.push(...pickRandomFrom([topTracks, midTracks], 2 + extraInterval));
 
 
     // =================================================================
@@ -147,7 +148,7 @@ function createArtistPromoPlaylist(params) {
     let insertionIndex = 0;
     while (otherArtistTracks.length > 0) {
       const artistTrack = otherArtistTracks.shift();
-      const interval = Math.floor(Math.random() * 3) + 2; // Random integer between 2 and 4
+      const interval = Math.floor(Math.random() * 3) + 2 + extraInterval; // Random integer between 2 and 4, plus the extra interval
       
       insertionIndex += interval;
       
@@ -218,7 +219,7 @@ function runArtistPromoUpdate() {
       name: '🌿🧘 Relax and Focus: Serene Melodies for Work, Study and Chill',
     },
   };
-  createArtistPromoPlaylist(playlistConfig1);
+  createArtistPromoPlaylist(playlistConfig1, 0);
 
   /**
    * Neurological Waves Science : 🏯⚖️🧘‍♂️ Shaolin Harmony in Motion: Qigong and Tai Chi Meditation Music (少林气功与太极)
@@ -237,7 +238,7 @@ function runArtistPromoUpdate() {
       name: '🏯⚖️🧘‍♂️ Shaolin Harmony in Motion: Qigong and Tai Chi Meditation Music (少林气功与太极)',
     },
   };
-  createArtistPromoPlaylist(playlistConfig2);
+  createArtistPromoPlaylist(playlistConfig2, 0);
 
 
 }
