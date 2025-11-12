@@ -18,8 +18,8 @@ function everynoiseNewChillVibes() {
 
   function main() {
 
-    // New chill vibes genres
-    // https://everynoise.com/new_releases_by_genre.cgi?genre=neo%20soul%2Cgolden%20age%20hip%20hop&region=US&hidedupes=on
+    // // New chill vibes genres
+    // // https://everynoise.com/new_releases_by_genre.cgi?genre=neo%20soul%2Cgolden%20age%20hip%20hop&region=US&hidedupes=on
     getEverynoiseReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f', 'bedroom soul' );
     getEverynoiseReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f', 'chill beats' );
     getEverynoiseReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f', 'chill pop' );
@@ -35,7 +35,7 @@ function everynoiseNewChillVibes() {
     filterNonChillTracks( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f' );
     sortNewReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f' );
   
-    // let date = '2023-02-24';
+    // let date = '2023-10-06';
     // getEverynoiseReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f', 'bedroom soul', date );
     // getEverynoiseReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f', 'chill beats', date );
     // getEverynoiseReleases( '* LATEST NEW CHILL VIBES *', '09FTQOXMEXdKuZHBsNYW8f', 'chill pop', date );
