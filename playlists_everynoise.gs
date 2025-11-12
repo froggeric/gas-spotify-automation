@@ -74,7 +74,7 @@ function everynoiseWeeklyReleases() {
       tracks = Release.getTracks({
         genre: genre,             // mandatory
         region: 'US',
-        // date: '2022-10-28',    // can be omitted for the last available week
+        // date: '2023-07-21',    // can be omitted for the last available week
         // type: 'album,single',  // optional if both types are needed
     });
     } else {
@@ -96,7 +96,8 @@ function everynoiseWeeklyReleases() {
     Playlist.saveWithAppend({
       name: name,
       id: id,
-      tracks: tracks
+      tracks: tracks,
+      description: description,
     });
 
   }
@@ -213,6 +214,7 @@ function everynoiseWeeklyReleases() {
       name: name,
       id: id,
       tracks: tracks,
+      description: description,
     });
 
   }
